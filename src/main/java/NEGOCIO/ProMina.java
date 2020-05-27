@@ -118,6 +118,7 @@ public class ProMina {
             pro.setResumen(resumen);
             Docente d = new Docente();
             d = findDocente(director);
+            pro.setDirector(d);
             pro.setFechainicio(crearFecha(fechaInicio));
             pro.setFechafin(crearFecha(fechaFin));
             try {

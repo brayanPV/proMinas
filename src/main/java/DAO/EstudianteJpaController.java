@@ -27,10 +27,6 @@ import javax.persistence.EntityManagerFactory;
  */
 public class EstudianteJpaController implements Serializable {
 
-    public EstudianteJpaController(){
-        emf = Conexion.getEm();
-    }
-    
     public EstudianteJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }

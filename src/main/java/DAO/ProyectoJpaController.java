@@ -12,6 +12,7 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import DTO.Docente;
 import DTO.Estudianteproyecto;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,10 @@ import javax.persistence.EntityManagerFactory;
  */
 public class ProyectoJpaController implements Serializable {
 
+    public ProyectoJpaController(){
+        this.emf = Conexion.getEm();
+    }
+    
     public ProyectoJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
@@ -54,6 +59,11 @@ public class ProyectoJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Docente director = proyecto.getDirector();
+            if (director != null) {
+                director = em.getReference(director.getClass(), director.getCodigo());
+                proyecto.setDirector(director);
+            }
             List<Estudianteproyecto> attachedEstudianteproyectoList = new ArrayList<Estudianteproyecto>();
             for (Estudianteproyecto estudianteproyectoListEstudianteproyectoToAttach : proyecto.getEstudianteproyectoList()) {
                 estudianteproyectoListEstudianteproyectoToAttach = em.getReference(estudianteproyectoListEstudianteproyectoToAttach.getClass(), estudianteproyectoListEstudianteproyectoToAttach.getEstudianteproyectoPK());
@@ -79,6 +89,10 @@ public class ProyectoJpaController implements Serializable {
             }
             proyecto.setJuradoproyectoList(attachedJuradoproyectoList);
             em.persist(proyecto);
+            if (director != null) {
+                director.getProyectoList().add(proyecto);
+                director = em.merge(director);
+            }
             for (Estudianteproyecto estudianteproyectoListEstudianteproyecto : proyecto.getEstudianteproyectoList()) {
                 Proyecto oldProyecto1OfEstudianteproyectoListEstudianteproyecto = estudianteproyectoListEstudianteproyecto.getProyecto1();
                 estudianteproyectoListEstudianteproyecto.setProyecto1(proyecto);
@@ -129,6 +143,8 @@ public class ProyectoJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             Proyecto persistentProyecto = em.find(Proyecto.class, proyecto.getId());
+            Docente directorOld = persistentProyecto.getDirector();
+            Docente directorNew = proyecto.getDirector();
             List<Estudianteproyecto> estudianteproyectoListOld = persistentProyecto.getEstudianteproyectoList();
             List<Estudianteproyecto> estudianteproyectoListNew = proyecto.getEstudianteproyectoList();
             List<Juradoanteproyecto> juradoanteproyectoListOld = persistentProyecto.getJuradoanteproyectoList();
@@ -173,6 +189,10 @@ public class ProyectoJpaController implements Serializable {
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
+            if (directorNew != null) {
+                directorNew = em.getReference(directorNew.getClass(), directorNew.getCodigo());
+                proyecto.setDirector(directorNew);
+            }
             List<Estudianteproyecto> attachedEstudianteproyectoListNew = new ArrayList<Estudianteproyecto>();
             for (Estudianteproyecto estudianteproyectoListNewEstudianteproyectoToAttach : estudianteproyectoListNew) {
                 estudianteproyectoListNewEstudianteproyectoToAttach = em.getReference(estudianteproyectoListNewEstudianteproyectoToAttach.getClass(), estudianteproyectoListNewEstudianteproyectoToAttach.getEstudianteproyectoPK());
@@ -202,6 +222,14 @@ public class ProyectoJpaController implements Serializable {
             juradoproyectoListNew = attachedJuradoproyectoListNew;
             proyecto.setJuradoproyectoList(juradoproyectoListNew);
             proyecto = em.merge(proyecto);
+            if (directorOld != null && !directorOld.equals(directorNew)) {
+                directorOld.getProyectoList().remove(proyecto);
+                directorOld = em.merge(directorOld);
+            }
+            if (directorNew != null && !directorNew.equals(directorOld)) {
+                directorNew.getProyectoList().add(proyecto);
+                directorNew = em.merge(directorNew);
+            }
             for (Estudianteproyecto estudianteproyectoListNewEstudianteproyecto : estudianteproyectoListNew) {
                 if (!estudianteproyectoListOld.contains(estudianteproyectoListNewEstudianteproyecto)) {
                     Proyecto oldProyecto1OfEstudianteproyectoListNewEstudianteproyecto = estudianteproyectoListNewEstudianteproyecto.getProyecto1();
@@ -306,6 +334,11 @@ public class ProyectoJpaController implements Serializable {
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
+            }
+            Docente director = proyecto.getDirector();
+            if (director != null) {
+                director.getProyectoList().remove(proyecto);
+                director = em.merge(director);
             }
             em.remove(proyecto);
             em.getTransaction().commit();

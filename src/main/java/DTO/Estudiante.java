@@ -5,7 +5,6 @@
  */
 package DTO;
 
-import DAO.CarreraJpaController;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -75,9 +74,6 @@ public class Estudiante implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "estudiante1")
     private List<Estudianteproyecto> estudianteproyectoList;
 
-    //CarreraJpaController carrera2DAO = new CarreraJpaController();
-    //List<Carrera> carreras = carrera2DAO.findCarreraEntities();
-    
     public Estudiante() {
     }
 
@@ -174,6 +170,5 @@ public class Estudiante implements Serializable {
     public String toString() {
         return "DTO.Estudiante[ codigo=" + codigo + " ]";
     }
-
     
 }

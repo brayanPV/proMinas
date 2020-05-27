@@ -77,6 +77,8 @@ public class Docente implements Serializable {
     private Carrera carrera;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "docente1")
     private List<Juradoproyecto> juradoproyectoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "director")
+    private List<Proyecto> proyectoList;
 
     public Docente() {
     }
@@ -168,6 +170,15 @@ public class Docente implements Serializable {
         this.juradoproyectoList = juradoproyectoList;
     }
 
+    @XmlTransient
+    public List<Proyecto> getProyectoList() {
+        return proyectoList;
+    }
+
+    public void setProyectoList(List<Proyecto> proyectoList) {
+        this.proyectoList = proyectoList;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -190,7 +201,7 @@ public class Docente implements Serializable {
 
     @Override
     public String toString() {
-        return "DTO.Docente[ codigo=" + codigo + " ]";
+        return nombre + " " + apellido;
     }
     
 }

@@ -24,7 +24,7 @@
 
                     <label for="director">Director</label>
                     <jsp:useBean id="docenteDAO" class="DAO.DocenteJpaController" scope="request"></jsp:useBean>
-                        <select class="form-control" name="carrera">
+                        <select class="form-control" name="director">
                             <option>Selecciones un director de proyecto</option>
                         <c:forEach var="u" items="${docenteDAO.findDocenteEntities()}">
                             <option value="<c:out value="${u.getCodigo()}"/>"><c:out value="${u.getCodigo()} -- ${u.getNombre()}"/></option>

@@ -15,6 +15,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -35,7 +37,6 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Proyecto.findAll", query = "SELECT p FROM Proyecto p")
-    , @NamedQuery(name = "Proyecto.findByDirector", query = "SELECT p FROM Proyecto p WHERE p.director = :director")
     , @NamedQuery(name = "Proyecto.findById", query = "SELECT p FROM Proyecto p WHERE p.id = :id")
     , @NamedQuery(name = "Proyecto.findByTitulo", query = "SELECT p FROM Proyecto p WHERE p.titulo = :titulo")
     , @NamedQuery(name = "Proyecto.findByFechainicio", query = "SELECT p FROM Proyecto p WHERE p.fechainicio = :fechainicio")
@@ -46,11 +47,6 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Proyecto implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 5)
-    @Column(name = "director")
-    private String director;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -76,13 +72,9 @@ public class Proyecto implements Serializable {
     @Size(min = 1, max = 500)
     @Column(name = "resumen")
     private String resumen;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "fechaanteproyecto")
     @Temporal(TemporalType.DATE)
     private Date fechaanteproyecto;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "fechaproyecto")
     @Temporal(TemporalType.DATE)
     private Date fechaproyecto;
@@ -94,6 +86,9 @@ public class Proyecto implements Serializable {
     private List<Asesor> asesorList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "proyecto1")
     private List<Juradoproyecto> juradoproyectoList;
+    @JoinColumn(name = "director", referencedColumnName = "codigo")
+    @ManyToOne(optional = false)
+    private Docente director;
 
     public Proyecto() {
     }
@@ -102,23 +97,12 @@ public class Proyecto implements Serializable {
         this.id = id;
     }
 
-    public Proyecto(Integer id, String director, String titulo, Date fechainicio, Date fechafin, String resumen, Date fechaanteproyecto, Date fechaproyecto) {
+    public Proyecto(Integer id, String titulo, Date fechainicio, Date fechafin, String resumen) {
         this.id = id;
-        this.director = director;
         this.titulo = titulo;
         this.fechainicio = fechainicio;
         this.fechafin = fechafin;
         this.resumen = resumen;
-        this.fechaanteproyecto = fechaanteproyecto;
-        this.fechaproyecto = fechaproyecto;
-    }
-
-    public String getDirector() {
-        return director;
-    }
-
-    public void setDirector(String director) {
-        this.director = director;
     }
 
     public Integer getId() {
@@ -211,6 +195,14 @@ public class Proyecto implements Serializable {
 
     public void setJuradoproyectoList(List<Juradoproyecto> juradoproyectoList) {
         this.juradoproyectoList = juradoproyectoList;
+    }
+
+    public Docente getDirector() {
+        return director;
+    }
+
+    public void setDirector(Docente director) {
+        this.director = director;
     }
 
     @Override

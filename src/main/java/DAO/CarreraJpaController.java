@@ -32,12 +32,12 @@ public class CarreraJpaController implements Serializable {
     }
     private EntityManagerFactory emf = null;
 
-     public CarreraJpaController(){
-        emf = Conexion.getEm();
-    }
-    
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
+    }
+    
+    public CarreraJpaController(){
+        this.emf = Conexion.getEm();
     }
 
     public void create(Carrera carrera) throws PreexistingEntityException, Exception {

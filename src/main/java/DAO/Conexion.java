@@ -13,8 +13,7 @@ import javax.persistence.Persistence;
  * @author stive
  */
 public class Conexion {
-
-   private static Conexion conexion;
+     private static Conexion conexion;
     private EntityManagerFactory bd;
     private static EntityManagerFactory em = null;
 

@@ -39,8 +39,8 @@ public class JuradoproyectoJpaController implements Serializable {
         if (juradoproyecto.getJuradoproyectoPK() == null) {
             juradoproyecto.setJuradoproyectoPK(new JuradoproyectoPK());
         }
-        juradoproyecto.getJuradoproyectoPK().setProyecto(juradoproyecto.getProyecto1().getId());
         juradoproyecto.getJuradoproyectoPK().setDocente(juradoproyecto.getDocente1().getCodigo());
+        juradoproyecto.getJuradoproyectoPK().setProyecto(juradoproyecto.getProyecto1().getId());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -78,8 +78,8 @@ public class JuradoproyectoJpaController implements Serializable {
     }
 
     public void edit(Juradoproyecto juradoproyecto) throws NonexistentEntityException, Exception {
-        juradoproyecto.getJuradoproyectoPK().setProyecto(juradoproyecto.getProyecto1().getId());
         juradoproyecto.getJuradoproyectoPK().setDocente(juradoproyecto.getDocente1().getCodigo());
+        juradoproyecto.getJuradoproyectoPK().setProyecto(juradoproyecto.getProyecto1().getId());
         EntityManager em = null;
         try {
             em = getEntityManager();

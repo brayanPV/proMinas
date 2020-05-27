@@ -147,7 +147,7 @@ public class Carrera implements Serializable {
 
     @Override
     public String toString() {
-        return nombre;
+        return "DTO.Carrera[ codigo=" + codigo + " ]";
     }
     
 }

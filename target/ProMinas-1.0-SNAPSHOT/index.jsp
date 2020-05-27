@@ -99,6 +99,9 @@
                             <li>
                                 <a href="JSP/list/listarEstudiantes.jsp"> VER ESTUDIANTES </a>
                             </li>
+                            <li>
+                                <a href="JSP/list/listarProyectos.jsp"> VER PROYECTOS </a>
+                            </li>
                         </ul>
                         
                     </aside>

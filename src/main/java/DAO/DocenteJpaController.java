@@ -20,6 +20,7 @@ import java.util.List;
 import DTO.Asesor;
 import DTO.Docente;
 import DTO.Juradoproyecto;
+import DTO.Proyecto;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
@@ -32,10 +33,11 @@ public class DocenteJpaController implements Serializable {
     public DocenteJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
-     public DocenteJpaController(){
-        emf = Conexion.getEm();
+
+    public DocenteJpaController() {
+        this.emf = Conexion.getEm();
     }
-    
+
     private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {
@@ -51,6 +53,9 @@ public class DocenteJpaController implements Serializable {
         }
         if (docente.getJuradoproyectoList() == null) {
             docente.setJuradoproyectoList(new ArrayList<Juradoproyecto>());
+        }
+        if (docente.getProyectoList() == null) {
+            docente.setProyectoList(new ArrayList<Proyecto>());
         }
         EntityManager em = null;
         try {
@@ -79,6 +84,12 @@ public class DocenteJpaController implements Serializable {
                 attachedJuradoproyectoList.add(juradoproyectoListJuradoproyectoToAttach);
             }
             docente.setJuradoproyectoList(attachedJuradoproyectoList);
+            List<Proyecto> attachedProyectoList = new ArrayList<Proyecto>();
+            for (Proyecto proyectoListProyectoToAttach : docente.getProyectoList()) {
+                proyectoListProyectoToAttach = em.getReference(proyectoListProyectoToAttach.getClass(), proyectoListProyectoToAttach.getId());
+                attachedProyectoList.add(proyectoListProyectoToAttach);
+            }
+            docente.setProyectoList(attachedProyectoList);
             em.persist(docente);
             if (carrera != null) {
                 carrera.getDocenteList().add(docente);
@@ -111,6 +122,15 @@ public class DocenteJpaController implements Serializable {
                     oldDocente1OfJuradoproyectoListJuradoproyecto = em.merge(oldDocente1OfJuradoproyectoListJuradoproyecto);
                 }
             }
+            for (Proyecto proyectoListProyecto : docente.getProyectoList()) {
+                Docente oldDirectorOfProyectoListProyecto = proyectoListProyecto.getDirector();
+                proyectoListProyecto.setDirector(docente);
+                proyectoListProyecto = em.merge(proyectoListProyecto);
+                if (oldDirectorOfProyectoListProyecto != null) {
+                    oldDirectorOfProyectoListProyecto.getProyectoList().remove(proyectoListProyecto);
+                    oldDirectorOfProyectoListProyecto = em.merge(oldDirectorOfProyectoListProyecto);
+                }
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             if (findDocente(docente.getCodigo()) != null) {
@@ -138,6 +158,8 @@ public class DocenteJpaController implements Serializable {
             List<Asesor> asesorListNew = docente.getAsesorList();
             List<Juradoproyecto> juradoproyectoListOld = persistentDocente.getJuradoproyectoList();
             List<Juradoproyecto> juradoproyectoListNew = docente.getJuradoproyectoList();
+            List<Proyecto> proyectoListOld = persistentDocente.getProyectoList();
+            List<Proyecto> proyectoListNew = docente.getProyectoList();
             List<String> illegalOrphanMessages = null;
             for (Juradoanteproyecto juradoanteproyectoListOldJuradoanteproyecto : juradoanteproyectoListOld) {
                 if (!juradoanteproyectoListNew.contains(juradoanteproyectoListOldJuradoanteproyecto)) {
@@ -161,6 +183,14 @@ public class DocenteJpaController implements Serializable {
                         illegalOrphanMessages = new ArrayList<String>();
                     }
                     illegalOrphanMessages.add("You must retain Juradoproyecto " + juradoproyectoListOldJuradoproyecto + " since its docente1 field is not nullable.");
+                }
+            }
+            for (Proyecto proyectoListOldProyecto : proyectoListOld) {
+                if (!proyectoListNew.contains(proyectoListOldProyecto)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain Proyecto " + proyectoListOldProyecto + " since its director field is not nullable.");
                 }
             }
             if (illegalOrphanMessages != null) {
@@ -191,6 +221,13 @@ public class DocenteJpaController implements Serializable {
             }
             juradoproyectoListNew = attachedJuradoproyectoListNew;
             docente.setJuradoproyectoList(juradoproyectoListNew);
+            List<Proyecto> attachedProyectoListNew = new ArrayList<Proyecto>();
+            for (Proyecto proyectoListNewProyectoToAttach : proyectoListNew) {
+                proyectoListNewProyectoToAttach = em.getReference(proyectoListNewProyectoToAttach.getClass(), proyectoListNewProyectoToAttach.getId());
+                attachedProyectoListNew.add(proyectoListNewProyectoToAttach);
+            }
+            proyectoListNew = attachedProyectoListNew;
+            docente.setProyectoList(proyectoListNew);
             docente = em.merge(docente);
             if (carreraOld != null && !carreraOld.equals(carreraNew)) {
                 carreraOld.getDocenteList().remove(docente);
@@ -230,6 +267,17 @@ public class DocenteJpaController implements Serializable {
                     if (oldDocente1OfJuradoproyectoListNewJuradoproyecto != null && !oldDocente1OfJuradoproyectoListNewJuradoproyecto.equals(docente)) {
                         oldDocente1OfJuradoproyectoListNewJuradoproyecto.getJuradoproyectoList().remove(juradoproyectoListNewJuradoproyecto);
                         oldDocente1OfJuradoproyectoListNewJuradoproyecto = em.merge(oldDocente1OfJuradoproyectoListNewJuradoproyecto);
+                    }
+                }
+            }
+            for (Proyecto proyectoListNewProyecto : proyectoListNew) {
+                if (!proyectoListOld.contains(proyectoListNewProyecto)) {
+                    Docente oldDirectorOfProyectoListNewProyecto = proyectoListNewProyecto.getDirector();
+                    proyectoListNewProyecto.setDirector(docente);
+                    proyectoListNewProyecto = em.merge(proyectoListNewProyecto);
+                    if (oldDirectorOfProyectoListNewProyecto != null && !oldDirectorOfProyectoListNewProyecto.equals(docente)) {
+                        oldDirectorOfProyectoListNewProyecto.getProyectoList().remove(proyectoListNewProyecto);
+                        oldDirectorOfProyectoListNewProyecto = em.merge(oldDirectorOfProyectoListNewProyecto);
                     }
                 }
             }
@@ -283,6 +331,13 @@ public class DocenteJpaController implements Serializable {
                     illegalOrphanMessages = new ArrayList<String>();
                 }
                 illegalOrphanMessages.add("This Docente (" + docente + ") cannot be destroyed since the Juradoproyecto " + juradoproyectoListOrphanCheckJuradoproyecto + " in its juradoproyectoList field has a non-nullable docente1 field.");
+            }
+            List<Proyecto> proyectoListOrphanCheck = docente.getProyectoList();
+            for (Proyecto proyectoListOrphanCheckProyecto : proyectoListOrphanCheck) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<String>();
+                }
+                illegalOrphanMessages.add("This Docente (" + docente + ") cannot be destroyed since the Proyecto " + proyectoListOrphanCheckProyecto + " in its proyectoList field has a non-nullable director field.");
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
@@ -346,5 +401,5 @@ public class DocenteJpaController implements Serializable {
             em.close();
         }
     }
-    
+
 }

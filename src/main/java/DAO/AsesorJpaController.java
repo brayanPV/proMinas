@@ -40,8 +40,8 @@ public class AsesorJpaController implements Serializable {
         if (asesor.getAsesorPK() == null) {
             asesor.setAsesorPK(new AsesorPK());
         }
-        asesor.getAsesorPK().setProyecto(asesor.getProyecto1().getId());
         asesor.getAsesorPK().setDocente(asesor.getDocente1().getCodigo());
+        asesor.getAsesorPK().setProyecto(asesor.getProyecto1().getId());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -88,8 +88,8 @@ public class AsesorJpaController implements Serializable {
     }
 
     public void edit(Asesor asesor) throws NonexistentEntityException, Exception {
-        asesor.getAsesorPK().setProyecto(asesor.getProyecto1().getId());
         asesor.getAsesorPK().setDocente(asesor.getDocente1().getCodigo());
+        asesor.getAsesorPK().setProyecto(asesor.getProyecto1().getId());
         EntityManager em = null;
         try {
             em = getEntityManager();
