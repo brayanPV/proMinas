@@ -7,8 +7,10 @@ package NEGOCIO;
 
 import DAO.CarreraJpaController;
 import DAO.Conexion;
+import DAO.DocenteJpaController;
 import DAO.EstudianteJpaController;
 import DTO.Carrera;
+import DTO.Docente;
 import DTO.Estudiante;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -26,6 +28,8 @@ public class ProMina {
     List<Estudiante> estudiantes = estudianteDAO.findEstudianteEntities();
     CarreraJpaController carDAO = new CarreraJpaController(con.getBd());
     List<Carrera> carreras = carDAO.findCarreraEntities();
+    DocenteJpaController docenteDAO = new DocenteJpaController(con.getBd());
+    List<Docente> docentes = docenteDAO.findDocenteEntities();
 
     public ProMina() {
     }
@@ -54,6 +58,31 @@ public class ProMina {
         }
         return exito;
     }
+    
+    public boolean registrarDocente(String codigo, String nombre, String apellido, String carrera, String fechaNacimiento, boolean genero) throws ParseException {
+        boolean exito = false;
+        Docente d = new Docente();
+        d = findDocente(codigo);
+        if (d == null) {
+            Docente doc = new Docente();
+            doc.setCodigo(codigo);
+            doc.setNombre(nombre);
+            doc.setApellido(apellido);
+            Carrera ca = new Carrera();
+            ca = findCarrera(carrera);
+            doc.setCarrera(ca);
+            doc.setFechanacimiento(crearFecha(fechaNacimiento));
+            doc.setGenero(genero);
+            try {
+                docenteDAO.create(doc);
+                exito = true;
+            } catch (Exception ex) {
+                System.err.println(ex.getMessage());
+            }
+
+        }
+        return exito;
+    }
 
     private Date crearFecha(String fecha) throws ParseException {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
@@ -63,6 +92,10 @@ public class ProMina {
 
     public Estudiante findEstudiante(String codigo) {
         return estudianteDAO.findEstudiante(codigo);
+    }
+    
+    public Docente findDocente(String codigo) {
+        return docenteDAO.findDocente(codigo);
     }
     
     public Carrera findCarrera(String codigo) {

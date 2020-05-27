@@ -14,10 +14,12 @@ C:\Users\stive\Documents\WEB\2020\ProMinas\src\main\java\DTO\Estudiante.java
 C:\Users\stive\Documents\WEB\2020\ProMinas\src\main\java\DAO\exceptions\IllegalOrphanException.java
 C:\Users\stive\Documents\WEB\2020\ProMinas\src\main\java\DTO\Estudianteproyecto.java
 C:\Users\stive\Documents\WEB\2020\ProMinas\src\main\java\DTO\JuradoanteproyectoPK.java
+C:\Users\stive\Documents\WEB\2020\ProMinas\src\main\java\CONTROLLER\RegistroEstController.java
 C:\Users\stive\Documents\WEB\2020\ProMinas\src\main\java\DTO\Proyecto.java
 C:\Users\stive\Documents\WEB\2020\ProMinas\src\main\java\DTO\EstudianteproyectoPK.java
 C:\Users\stive\Documents\WEB\2020\ProMinas\src\main\java\DAO\JuradoproyectoJpaController.java
 C:\Users\stive\Documents\WEB\2020\ProMinas\src\main\java\DAO\TipoasesorJpaController.java
+C:\Users\stive\Documents\WEB\2020\ProMinas\src\main\java\CONTROLLER\RegistroDocController.java
 C:\Users\stive\Documents\WEB\2020\ProMinas\src\main\java\DTO\Docente.java
 C:\Users\stive\Documents\WEB\2020\ProMinas\src\main\java\DTO\AsesorPK.java
 C:\Users\stive\Documents\WEB\2020\ProMinas\src\main\java\DTO\Juradoproyecto.java

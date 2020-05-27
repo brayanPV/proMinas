@@ -29,7 +29,7 @@
                 <nav class="navbar navbar-expand-lg navbar-dark primary-color">
 
                     <!-- Navbar brand -->
-                    <a class="navbar-brand" href="index.jsp>ProMinas</a>
+                    <a class="navbar-brand" href="index.jsp">ProMinas</a>
 
                        <!-- Collapse button -->
                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,15 +40,12 @@
                         <div class="collapse navbar-collapse" id="basicExampleNav">
 
                             <!-- Links -->
-                            <ul class="navbar-nav mr-auto">
+                            <ul class="navbar-nav">
                                 <li class="nav-item">
                                     <a class="nav-link" href="JSP/registrarEstudiante.jsp">Registrar Estudiante</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="index.html">Productos</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="" data-toggle="modal" data-target="#modalContactForm">Contacto</a>
+                                    <a class="nav-link" href="JSP/registrarDocente.jsp">Registrar Docente</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#"><i class="fas fa-shopping-cart"></i>Carrito</a>
@@ -176,4 +173,4 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.16.0/js/mdb.min.js"></script>
     <script type="text/javascript">
 
-</html>
+        </html>

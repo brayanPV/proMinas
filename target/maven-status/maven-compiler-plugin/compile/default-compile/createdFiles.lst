@@ -1,0 +1,13 @@
+DTO\EstudianteproyectoPK_.class
+DTO\Carrera_.class
+DTO\Docente_.class
+DTO\JuradoproyectoPK_.class
+DTO\Estudiante_.class
+DTO\Juradoproyecto_.class
+DTO\Juradoanteproyecto_.class
+DTO\Proyecto_.class
+DTO\JuradoanteproyectoPK_.class
+DTO\Estudianteproyecto_.class
+DTO\AsesorPK_.class
+DTO\Tipoasesor_.class
+DTO\Asesor_.class
