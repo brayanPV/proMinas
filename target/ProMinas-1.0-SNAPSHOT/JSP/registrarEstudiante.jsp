@@ -19,11 +19,9 @@
         <div class="container">
             <button> <a href="../index.jsp">INDEX </a></button>
             <p>FORMULARIO DE REGISTRO DE ESTUDIANTE</p>
-            <form>
+            <form action="../RegistroEstController" method="POST">
                 <div class="form-group">
 
-                    fechanacimiento
-                    genero
                     <label for="codigo">Codigo</label>
                     <input type="text" class="form-control" name="codigo" aria-describedby="codigo" placeholder="Ingrese su codigo">
 
@@ -54,8 +52,8 @@
                     <label for="genero">Genero</label>
                     <select class="form-control" name="genero">
                         <option>Selecciones un genero</option>
-                        <option value="1">Masculino</option>
-                        <option value="0">Femenino</option>
+                        <option value="true">Masculino</option>
+                        <option value="false">Femenino</option>
                     </select>
 
                 </div>
