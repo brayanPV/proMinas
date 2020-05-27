@@ -32,6 +32,10 @@ public class DocenteJpaController implements Serializable {
     public DocenteJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
+     public DocenteJpaController(){
+        emf = Conexion.getEm();
+    }
+    
     private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {

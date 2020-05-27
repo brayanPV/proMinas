@@ -13,7 +13,7 @@
 <html>
     <head>
         <jsp:include page="../templates/meta.jsp"/>
-        <title>Index</title>
+        <title>Registrar Docente</title>
     </head>
     <body>
         <div class="container">
@@ -60,5 +60,6 @@
                 <button type="submit" class="btn btn-primary">Registrar</button>
             </form>
         </div>
+        <jsp:include page="../templates/footer.jsp"/> 
     </body>
 </html>

@@ -31,54 +31,86 @@
                     <!-- Navbar brand -->
                     <a class="navbar-brand" href="index.jsp">ProMinas</a>
 
-                       <!-- Collapse button -->
-                       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
-                       <span class="navbar-toggler-icon"></span>
-                        </button>
+                    <!-- Collapse button -->
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
 
-                        <!-- Collapsible content -->
-                        <div class="collapse navbar-collapse" id="basicExampleNav">
+                    <!-- Collapsible content -->
+                    <div class="collapse navbar-collapse" id="basicExampleNav">
 
-                            <!-- Links -->
-                            <ul class="navbar-nav">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="JSP/registrarEstudiante.jsp">Registrar Estudiante</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="JSP/registrarDocente.jsp">Registrar Docente</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#"><i class="fas fa-shopping-cart"></i>Carrito</a>
-                                </li>
+                        <!-- Links -->
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="JSP/registrarCarrera.jsp">Registrar Carrera</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="JSP/registrarEstudiante.jsp">Registrar Estudiante</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="JSP/registrarDocente.jsp">Registrar Docente</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"><i class="fas fa-shopping-cart"></i>Carrito</a>
+                            </li>
 
-                            </ul>
-                            <ul class="navbar-nav ml-auto">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="" data-toggle="modal" data-target="#modalLoginForm">Iniciar Sesion</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#" data-toggle="modal" data-target="#modalRegisterForm">Registrarte</a>
-                                </li>
+                        </ul>
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="" data-toggle="modal" data-target="#modalLoginForm">Iniciar Sesion</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-toggle="modal" data-target="#modalRegisterForm">Registrarte</a>
+                            </li>
 
 
-                            </ul>
-                            <!-- Links -->
+                        </ul>
+                        <!-- Links -->
 
-                            <!--<form class="form-inline">
-                                <div class="md-form my-0">
-                                    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                                </div>
-                            </form>-->
-                        </div>
-                        <!-- Collapsible content -->
+                        <!--<form class="form-inline">
+                            <div class="md-form my-0">
+                                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                            </div>
+                        </form>-->
+                    </div>
+                    <!-- Collapsible content -->
 
                 </nav>
                 <!--/.Navbar-->
             </header>
-            <h3>HEY OLA</h3>
-        </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <section>
+                        <p>HEY AQUI VAMOS A ASOCIAR COSAS</p>
+
+                    </section>
+                </div>
+                <div class="col-md-4">
+                    <aside>
+                        <p>En los siguientes enlaces puede encontrar diferente listados</p>
+                        <ul>
+                            <li>
+                                <a href="JSP/list/listarCarreras.jsp"> VER CARRERAS </a>
+                            </li>
+                            <li>
+                                <a href="JSP/list/listarDocentes.jsp"> VER DOCENTES </a>
+                            </li>
+                            <li>
+                                <a href="JSP/list/listarEstudiantes.jsp"> VER ESTUDIANTES </a>
+                            </li>
+                        </ul>
+                        
+                    </aside>
+                </div>
+
+            </div>
+
+
+
+        
         <!-- <//jsp:include page="templates/footer.jsp"/> -->
 
+        <div class="row">
         <footer class="page-footer font-small mdb-color lighten-3 pt-4">
 
             <!-- Footer Elements -->
@@ -161,6 +193,8 @@
 
         </footer>
         <!-- Footer -->
+        </div>
+        </div>
     </body>
 
     <!-- JQuery -->
@@ -173,4 +207,4 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.16.0/js/mdb.min.js"></script>
     <script type="text/javascript">
 
-        </html>
+   </html>

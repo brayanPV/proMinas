@@ -28,8 +28,8 @@ public class ProMina {
     List<Estudiante> estudiantes = estudianteDAO.findEstudianteEntities();
     CarreraJpaController carDAO = new CarreraJpaController(con.getBd());
     List<Carrera> carreras = carDAO.findCarreraEntities();
-    DocenteJpaController docenteDAO = new DocenteJpaController(con.getBd());
-    List<Docente> docentes = docenteDAO.findDocenteEntities();
+    DocenteJpaController doDAO = new DocenteJpaController(con.getBd());
+    List<Docente> docentes = doDAO.findDocenteEntities();
 
     public ProMina() {
     }
@@ -58,7 +58,7 @@ public class ProMina {
         }
         return exito;
     }
-    
+
     public boolean registrarDocente(String codigo, String nombre, String apellido, String carrera, String fechaNacimiento, boolean genero) throws ParseException {
         boolean exito = false;
         Docente d = new Docente();
@@ -74,12 +74,32 @@ public class ProMina {
             doc.setFechanacimiento(crearFecha(fechaNacimiento));
             doc.setGenero(genero);
             try {
-                docenteDAO.create(doc);
+                doDAO.create(doc);
                 exito = true;
             } catch (Exception ex) {
                 System.err.println(ex.getMessage());
             }
 
+        }
+        return exito;
+    }
+
+    public boolean registrarCarrera(String codigo, String nombre, int credito, int semestre) {
+        boolean exito = false;
+        Carrera c = new Carrera();
+        c = findCarrera(codigo);
+        if(c==null){
+            Carrera ca = new Carrera();
+            ca.setCodigo(codigo);
+            ca.setNombre(nombre);
+            ca.setCredito(credito);
+            ca.setSemestre(semestre);
+            try{
+                carDAO.create(ca);
+                exito = true;
+            }catch(Exception e){
+                System.err.println(e.getMessage());
+            }
         }
         return exito;
     }
@@ -93,11 +113,11 @@ public class ProMina {
     public Estudiante findEstudiante(String codigo) {
         return estudianteDAO.findEstudiante(codigo);
     }
-    
+
     public Docente findDocente(String codigo) {
-        return docenteDAO.findDocente(codigo);
+        return doDAO.findDocente(codigo);
     }
-    
+
     public Carrera findCarrera(String codigo) {
         return carDAO.findCarrera(codigo);
     }
