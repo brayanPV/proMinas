@@ -51,8 +51,9 @@
                                 <a class="nav-link" href="JSP/registrarDocente.jsp">Registrar Docente</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#"><i class="fas fa-shopping-cart"></i>Carrito</a>
+                                <a class="nav-link" href="JSP/registrarProyecto.jsp">Registrar Proyecto</a>
                             </li>
+                            
 
                         </ul>
                         <ul class="navbar-nav ml-auto">

@@ -17,7 +17,7 @@
     </head>
     <body>
         <div class="container">
-            <button> <a href="../index.jsp">INDEX </a></button>
+            <a class="btn btn-primary" role="button" href="../index.jsp">INDEX </a>
             <p>FORMULARIO DE REGISTRO DE ESTUDIANTE</p>
             <form action="../RegistroEstController" method="POST">
                 <div class="form-group">

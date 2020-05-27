@@ -9,9 +9,11 @@ import DAO.CarreraJpaController;
 import DAO.Conexion;
 import DAO.DocenteJpaController;
 import DAO.EstudianteJpaController;
+import DAO.ProyectoJpaController;
 import DTO.Carrera;
 import DTO.Docente;
 import DTO.Estudiante;
+import DTO.Proyecto;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -30,6 +32,8 @@ public class ProMina {
     List<Carrera> carreras = carDAO.findCarreraEntities();
     DocenteJpaController doDAO = new DocenteJpaController(con.getBd());
     List<Docente> docentes = doDAO.findDocenteEntities();
+    ProyectoJpaController proyectoDAO = new ProyectoJpaController(con.getBd());
+    List<Proyecto> proyectos = proyectoDAO.findProyectoEntities();
 
     public ProMina() {
     }
@@ -88,17 +92,39 @@ public class ProMina {
         boolean exito = false;
         Carrera c = new Carrera();
         c = findCarrera(codigo);
-        if(c==null){
+        if (c == null) {
             Carrera ca = new Carrera();
             ca.setCodigo(codigo);
             ca.setNombre(nombre);
             ca.setCredito(credito);
             ca.setSemestre(semestre);
-            try{
+            try {
                 carDAO.create(ca);
                 exito = true;
-            }catch(Exception e){
+            } catch (Exception e) {
                 System.err.println(e.getMessage());
+            }
+        }
+        return exito;
+    }
+
+    public boolean registrarProyecto(String director, String titulo, String fechaInicio, String fechaFin, String resumen) throws ParseException {
+        boolean exito = false;
+        Proyecto p = new Proyecto();
+        p = findProyectoNombre(titulo);
+        if (p == null) {
+            Proyecto pro = new Proyecto();
+            pro.setTitulo(titulo);
+            pro.setResumen(resumen);
+            Docente d = new Docente();
+            d = findDocente(director);
+            pro.setFechainicio(crearFecha(fechaInicio));
+            pro.setFechafin(crearFecha(fechaFin));
+            try {
+                proyectoDAO.create(pro);
+                exito = true;
+            } catch (Exception e) {
+                System.out.println("Error " + e.getMessage());
             }
         }
         return exito;
@@ -121,4 +147,14 @@ public class ProMina {
     public Carrera findCarrera(String codigo) {
         return carDAO.findCarrera(codigo);
     }
+
+    public Proyecto findProyectoNombre(String titulo) {
+        for (Proyecto p : proyectos) {
+            if (p.getTitulo().equalsIgnoreCase(titulo)) {
+                return p;
+            }
+        }
+        return null;
+    }
+
 }

@@ -7,6 +7,7 @@ C:\Users\stive\Documents\WEB\2020\ProMinas\src\main\java\DAO\exceptions\Nonexist
 C:\Users\stive\Documents\WEB\2020\ProMinas\src\main\java\DAO\exceptions\PreexistingEntityException.java
 C:\Users\stive\Documents\WEB\2020\ProMinas\src\main\java\DTO\Carrera.java
 C:\Users\stive\Documents\WEB\2020\ProMinas\src\main\java\DAO\ProyectoJpaController.java
+C:\Users\stive\Documents\WEB\2020\ProMinas\src\main\java\CONTROLLER\RegistroCarController.java
 C:\Users\stive\Documents\WEB\2020\ProMinas\src\main\java\DTO\Tipoasesor.java
 C:\Users\stive\Documents\WEB\2020\ProMinas\src\main\java\DAO\Conexion.java
 C:\Users\stive\Documents\WEB\2020\ProMinas\src\main\java\NEGOCIO\ProMina.java
@@ -15,6 +16,7 @@ C:\Users\stive\Documents\WEB\2020\ProMinas\src\main\java\DAO\exceptions\IllegalO
 C:\Users\stive\Documents\WEB\2020\ProMinas\src\main\java\DTO\Estudianteproyecto.java
 C:\Users\stive\Documents\WEB\2020\ProMinas\src\main\java\DTO\JuradoanteproyectoPK.java
 C:\Users\stive\Documents\WEB\2020\ProMinas\src\main\java\CONTROLLER\RegistroEstController.java
+C:\Users\stive\Documents\WEB\2020\ProMinas\src\main\java\CONTROLLER\RegistroProController.java
 C:\Users\stive\Documents\WEB\2020\ProMinas\src\main\java\DTO\Proyecto.java
 C:\Users\stive\Documents\WEB\2020\ProMinas\src\main\java\DTO\EstudianteproyectoPK.java
 C:\Users\stive\Documents\WEB\2020\ProMinas\src\main\java\DAO\JuradoproyectoJpaController.java
